@@ -1,4 +1,4 @@
-package MethodOverloading;
+package MethodOverriding;
 
 // 사람을 표현하는 부모 클래스
 class Person {
