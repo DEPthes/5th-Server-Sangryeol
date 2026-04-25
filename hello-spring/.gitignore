@@ -1,0 +1,72 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Logs ###
+*.log
+logs/
+**/logs/
+
+### System Files ###
+.DS_Store
+Thumbs.db
+
+### Security & Secrets (DO NOT COMMIT) ###
+# Spring Boot 설정 파일
+src/main/resources/application.properties
+src/main/resources/application.yml
+
+# 환경변수 파일
+.env
+
+# Firebase, Google API 인증 키 등
+*.json
+src/main/resources/firebase/*.json
+
+# 인증서 및 비밀키
+*.keystore
+*.jks
+*.pem
+*.p12
+*.crt
+*.cer
+*.key
+
+# 사용자 정의 보안 디렉토리
+/secrets/
+/config/secret-configs/
+src/main/resources/security/
