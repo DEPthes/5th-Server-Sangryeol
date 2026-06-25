@@ -1,0 +1,12 @@
+spring.application.name=BlogProject
+
+# MySQL
+spring.datasource.url=jdbc:mysql://localhost:3306/yourDatabaseName?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+spring.datasource.username=yourUsername
+spring.datasource.password=yourPassword
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# JPA
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
