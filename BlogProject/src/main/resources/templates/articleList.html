@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>블로그 글 목록</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+<div class="p-5 mb-5 text-center</> bg-light">
+    <h1 class="mb-3 fw-bold">My Blog</h1>
+    <h4 class="mb-3">Welcome to Blog!</h4>
+</div>
+
+<div class="container">
+    <button type="button" id="create-btn"
+            th:onclick="|location.href='@{/new-article}'|"
+            class="btn btn-secondary btn-sm mb-3">글 등록</button>
+
+    <div class="row-6" th:each="item : ${articles}">
+        <div class="card mb-3">
+            <div class="card-header" th:text="${item.id}">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title fw-bold" th:text="${item.title}"></h5>
+                <p class="card-text" th:text="${item.content}"></p>
+                <a th:href="@{/articles/{id}(id=${item.id})}" class="btn btn-primary">상세 내용 보기</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
