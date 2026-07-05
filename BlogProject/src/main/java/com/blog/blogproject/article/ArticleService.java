@@ -3,6 +3,10 @@ package com.blog.blogproject.article;
 import com.blog.blogproject.article.dto.AddArticleRequest;
 import com.blog.blogproject.article.dto.UpdateArticleRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +32,13 @@ public class ArticleService {
     public Article findById(long id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+    }
+
+    // 페이징을 적용한 게시글 목록 조회 메서드
+    public Page<Article> getList(int page) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "id"));
+
+        return articleRepository.findAll(pageable);
     }
 
     // 블로그 글 삭제 메서드
