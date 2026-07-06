@@ -2,6 +2,8 @@ package com.blog.blogproject.article;
 
 import com.blog.blogproject.article.dto.ArticleListViewResponse;
 import com.blog.blogproject.article.dto.ArticleViewResponse;
+import com.blog.blogproject.user.User;
+import com.blog.blogproject.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -18,13 +21,20 @@ import java.util.List;
 public class ArticleViewController {
 
     private final ArticleService articleService;
+    private final UserService userService;
 
     @GetMapping("/articles")
-    public String getArticles(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+    public String getArticles(Model model, @RequestParam(value="page", defaultValue="0") int page, Principal principal) {
         Page<ArticleListViewResponse> paging = articleService.getList(page)
                         .map(ArticleListViewResponse::new);
 
         model.addAttribute("paging", paging);   // 블로그 글 리스트 저장
+
+        // 현재 로그인 한 사용자 조회
+        User user = userService.findByEmail(principal.getName());
+
+        // 유저 정보 전달
+        model.addAttribute("user", user);
 
         return "articleList";   // articleList.html 뷰 조회
     }
