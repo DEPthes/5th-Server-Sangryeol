@@ -54,6 +54,7 @@ public class TokenProvider {
     // JWT 토큰 유효성 검증 역할을 하는 메서드
     public boolean validToken(String token) {
         try {
+            // JWT 서명 생성 및 검증에 사용할 비밀 키(SecretKey) 객체 생성
             SecretKey key = Keys.hmacShaKeyFor(
                     jwtProperties.getSecretKey()
                             .getBytes(StandardCharsets.UTF_8)
@@ -72,11 +73,21 @@ public class TokenProvider {
 
     // 토큰 기반으로 인증 정보를 가져오는 역할을 하는 메서드
     public Authentication getAuthentication(String token) {
+
+        // JWT 토큰에서 사용자 정보(Claims)를 추출
         Claims claims = getClaims(token);
+
+        // 기본 사용자 권한(Role)을 ROLE_USER로 설정
         Set<SimpleGrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
 
-        return new UsernamePasswordAuthenticationToken(new org.springframework.security.core.userdetails.User(claims.getSubject
-                (), "", authorities), token, authorities);
+        // 사용자 정보와 권한을 포함한 인증 객체를 생성하여 반환
+        return new UsernamePasswordAuthenticationToken(new org.springframework.security.core.userdetails.User(
+                claims.getSubject(),    // 이메일(사용자 식별 정보)
+                "",                     // 비밀번호는 인증이 완료된 상태이므로 사용하지 않ㅇ,ㅁ
+                authorities             // 사용자 권한
+        ),
+                token,                  // 인증 정보(Credential)로 JWT 토큰 저장
+                authorities);           // 사용자 권한 목록
     }
 
     // 토큰 기반으로 유저 ID를 가져오는 역할을 하는 메서드
