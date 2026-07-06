@@ -83,7 +83,7 @@ public class TokenProvider {
         // 사용자 정보와 권한을 포함한 인증 객체를 생성하여 반환
         return new UsernamePasswordAuthenticationToken(new org.springframework.security.core.userdetails.User(
                 claims.getSubject(),    // 이메일(사용자 식별 정보)
-                "",                     // 비밀번호는 인증이 완료된 상태이므로 사용하지 않ㅇ,ㅁ
+                "",                     // 비밀번호는 인증이 완료된 상태이므로 사용하지 않으ㅁ
                 authorities             // 사용자 권한
         ),
                 token,                  // 인증 정보(Credential)로 JWT 토큰 저장
